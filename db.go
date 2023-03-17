@@ -463,6 +463,11 @@ func ListColumnFamilies(opts *Options, name string) (names []string, err error) 
 	return
 }
 
+// UnsafeGetDB returns the underlying c rocksdb instance.
+func (db *DB) UnsafeGetDB() unsafe.Pointer {
+	return unsafe.Pointer(db.c)
+}
+
 // Name returns the name of the database.
 func (db *DB) Name() string {
 	return db.name
