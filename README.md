@@ -1,9 +1,9 @@
 # grocksdb, RocksDB wrapper for Go
 
-[![](https://github.com/linxGnu/grocksdb/workflows/CI/badge.svg)]()
-[![Go Report Card](https://goreportcard.com/badge/github.com/linxGnu/grocksdb)](https://goreportcard.com/report/github.com/linxGnu/grocksdb)
+[![](https://github.com/nick13jaremek/grocksdb/workflows/CI/badge.svg)]()
+[![Go Report Card](https://goreportcard.com/badge/github.com/nick13jaremek/grocksdb)](https://goreportcard.com/report/github.com/nick13jaremek/grocksdb)
 [![Coverage Status](https://coveralls.io/repos/github/linxGnu/grocksdb/badge.svg?branch=master)](https://coveralls.io/github/linxGnu/grocksdb?branch=master)
-[![godoc](https://img.shields.io/badge/docs-GoDoc-green.svg)](https://godoc.org/github.com/linxGnu/grocksdb)
+[![godoc](https://img.shields.io/badge/docs-GoDoc-green.svg)](https://godoc.org/github.com/nick13jaremek/grocksdb)
 
 This is a `Fork` from [tecbot/gorocksdb](https://github.com/tecbot/gorocksdb). I respect the author work and community contribution.
 The `LICENSE` still remains as upstream.
@@ -49,7 +49,7 @@ CGO_LDFLAGS="-L/path/to/rocksdb -lrocksdb -lstdc++ -lm -lz -lsnappy -llz4 -lzstd
 
 ## Usage
 
-See also: [doc](https://godoc.org/github.com/linxGnu/grocksdb)
+See also: [doc](https://godoc.org/github.com/nick13jaremek/grocksdb)
 
 ## API Support
 
