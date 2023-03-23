@@ -202,8 +202,9 @@ func (opts *Options) SetNativeComparator(cmp unsafe.Pointer) {
 //
 // Default: nil
 func (opts *Options) SetMergeOperator(value MergeOperator) {
+	fmt.Println("start:SetMergeOperator")
 	C.rocksdb_mergeoperator_destroy(opts.cmo)
-
+	fmt.Println("CMO", opts.cmo)
 	if nmo, ok := value.(*nativeMergeOperator); ok {
 		opts.cmo = nmo.c
 	} else {
@@ -212,6 +213,7 @@ func (opts *Options) SetMergeOperator(value MergeOperator) {
 	}
 
 	C.rocksdb_options_set_merge_operator(opts.c, opts.cmo)
+	fmt.Println("end:SetMergeOperator")
 }
 
 // This is a factory that provides compaction filter objects which allow
@@ -2462,29 +2464,40 @@ func (opts *Options) SetMemtableWholeKeyFiltering(value bool) {
 
 // Destroy deallocates the Options object.
 func (opts *Options) Destroy() {
+	fmt.Println("Options::Destroy::rocksdb_options_destroy", opts.c)
 	C.rocksdb_options_destroy(opts.c)
 	opts.c = nil
+	fmt.Println("Options::Destroy::rocksdb_options_destroy")
 
+	fmt.Println("Options::Destroy::rocksdb_comparator_destroy", opts.ccmp)
 	C.rocksdb_comparator_destroy(opts.ccmp)
 	opts.ccmp = nil
+	fmt.Println("Options::Destroy::rocksdb_comparator_destroy")
 
+	fmt.Println("Options::Destroy::rocksdb_slicetransform_destroy", opts.cst)
 	C.rocksdb_slicetransform_destroy(opts.cst)
 	opts.cst = nil
+	fmt.Println("Options::Destroy::rocksdb_slicetransform_destroy")
 
+	fmt.Println("Options::Destroy::rocksdb_compactionfilter_destroy", opts.ccf)
 	C.rocksdb_compactionfilter_destroy(opts.ccf)
 	opts.ccf = nil
+	fmt.Println("Options::Destroy::rocksdb_compactionfilter_destroy")
 
-	if opts.cmo != nil {
-		C.rocksdb_mergeoperator_destroy(opts.cmo)
-		opts.cmo = nil
-	}
+	fmt.Println("Options::Destroy::rocksdb_mergeoperator_destroy", opts.cmo)
+	C.rocksdb_mergeoperator_destroy(opts.cmo)
+	opts.cmo = nil
+	fmt.Println("Options::Destroy::rocksdb_mergeoperator_destroy")
 
 	if opts.env != nil {
+		fmt.Println("Options::Destroy::rocksdb_env_destroy", opts.env)
 		C.rocksdb_env_destroy(opts.env)
 		opts.env = nil
+		fmt.Println("Options::Destroy::rocksdb_env_destroy")
 	}
 
 	opts.bbto = nil
+	fmt.Println("Options::Destroy::end")
 }
 
 type LatestOptions struct {
