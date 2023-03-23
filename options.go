@@ -213,8 +213,8 @@ func (opts *Options) SetMergeOperator(value MergeOperator) {
 	}
 
 	C.rocksdb_options_set_merge_operator(opts.c, opts.cmo)
-	fmt.Println("SetMergeOperator::c", opts.c)
-	fmt.Println("SetMergeOperator::cmo", opts.cmo)
+	fmt.Println("SetMergeOperator::c", &opts.c)
+	fmt.Println("SetMergeOperator::cmo", &opts.cmo)
 	fmt.Println("end:SetMergeOperator")
 }
 
@@ -2471,28 +2471,28 @@ func (opts *Options) Destroy() {
 	opts.c = nil
 	fmt.Println("Options::Destroy::rocksdb_options_destroy")
 
-	fmt.Println("Options::Destroy::rocksdb_comparator_destroy", opts.ccmp)
+	fmt.Println("Options::Destroy::rocksdb_comparator_destroy", &opts.ccmp)
 	C.rocksdb_comparator_destroy(opts.ccmp)
 	opts.ccmp = nil
 	fmt.Println("Options::Destroy::rocksdb_comparator_destroy")
 
-	fmt.Println("Options::Destroy::rocksdb_slicetransform_destroy", opts.cst)
+	fmt.Println("Options::Destroy::rocksdb_slicetransform_destroy", &opts.cst)
 	C.rocksdb_slicetransform_destroy(opts.cst)
 	opts.cst = nil
 	fmt.Println("Options::Destroy::rocksdb_slicetransform_destroy")
 
-	fmt.Println("Options::Destroy::rocksdb_compactionfilter_destroy", opts.ccf)
+	fmt.Println("Options::Destroy::rocksdb_compactionfilter_destroy", &opts.ccf)
 	C.rocksdb_compactionfilter_destroy(opts.ccf)
 	opts.ccf = nil
 	fmt.Println("Options::Destroy::rocksdb_compactionfilter_destroy")
 
-	fmt.Println("Options::Destroy::rocksdb_mergeoperator_destroy", opts.cmo)
+	fmt.Println("Options::Destroy::rocksdb_mergeoperator_destroy", &opts.cmo)
 	C.rocksdb_mergeoperator_destroy(opts.cmo)
 	opts.cmo = nil
 	fmt.Println("Options::Destroy::rocksdb_mergeoperator_destroy")
 
 	if opts.env != nil {
-		fmt.Println("Options::Destroy::rocksdb_env_destroy", opts.env)
+		fmt.Println("Options::Destroy::rocksdb_env_destroy", &opts.env)
 		C.rocksdb_env_destroy(opts.env)
 		opts.env = nil
 		fmt.Println("Options::Destroy::rocksdb_env_destroy")
