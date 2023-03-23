@@ -2474,8 +2474,10 @@ func (opts *Options) Destroy() {
 	C.rocksdb_compactionfilter_destroy(opts.ccf)
 	opts.ccf = nil
 
-	C.rocksdb_mergeoperator_destroy(opts.cmo)
-	opts.cmo = nil
+	if opts.cmo != nil {
+		C.rocksdb_mergeoperator_destroy(opts.cmo)
+		opts.cmo = nil
+	}
 
 	if opts.env != nil {
 		C.rocksdb_env_destroy(opts.env)
