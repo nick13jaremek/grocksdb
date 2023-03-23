@@ -204,7 +204,7 @@ func (opts *Options) SetNativeComparator(cmp unsafe.Pointer) {
 func (opts *Options) SetMergeOperator(value MergeOperator) {
 	fmt.Println("start:SetMergeOperator")
 	C.rocksdb_mergeoperator_destroy(opts.cmo)
-	fmt.Println("CMO", opts.cmo)
+
 	if nmo, ok := value.(*nativeMergeOperator); ok {
 		opts.cmo = nmo.c
 	} else {
@@ -213,6 +213,8 @@ func (opts *Options) SetMergeOperator(value MergeOperator) {
 	}
 
 	C.rocksdb_options_set_merge_operator(opts.c, opts.cmo)
+	fmt.Println("SetMergeOperator::c", opts.c)
+	fmt.Println("SetMergeOperator::cmo", opts.cmo)
 	fmt.Println("end:SetMergeOperator")
 }
 
